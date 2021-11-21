@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 import { BirthdayCake } from "../components/BirthdayCake";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const [isCandleOn, setIsCandleOn] = useState(true);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,9 +19,11 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>Happy Birthday!</h1>
         <div className={styles.cakeContainer}>
-          <BirthdayCake />
+          <BirthdayCake isCandleOn={isCandleOn} />
         </div>
-        <button className={styles.button}>MAKE A WISH!</button>
+        <button className={styles.button} onClick={() => setIsCandleOn(false)}>
+          MAKE A WISH!
+        </button>
       </main>
     </div>
   );

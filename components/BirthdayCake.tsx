@@ -1,4 +1,10 @@
-export function BirthdayCake() {
+import styles from "../styles/BirthdayCake.module.css";
+
+type BirthdayCakeProps = {
+  isCandleOn: boolean;
+};
+
+export function BirthdayCake({ isCandleOn }: BirthdayCakeProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,30 +27,32 @@ export function BirthdayCake() {
           xlinkHref="#a"
         ></linearGradient>
       </defs>
+      {/*wick*/}
       <path
         fill="#459492"
         d="M256 85.9a8.4 8.4 0 00-8.4 8.4v45h16.8v-45c0-4.7-3.7-8.4-8.4-8.4z"
       ></path>
-      {/*wick*/}
+      {/*yellow flame*/}
       <path
+        className={isCandleOn ? styles.flameOn : styles.flameOff}
         fill="#ffd102"
         d="M211 60.8c0-24 18.5-49.2 45-60.8 26.5 11.6 45 36.8 45 60.8a45 45 0 01-90 0z"
       ></path>
-      {/*yellow flame*/}
+      {/*orange flame*/}
       <path
+        className={isCandleOn ? undefined : styles.flameOff}
         fill="#f95"
         d="M228.9 77.7C228.9 63.2 240 48 256 41c16 7 27.1 22.2 27.1 36.7a27.1 27.1 0 01-54.2 0z"
       ></path>
-      {/*orange flame*/}
       <path
         fill="#9ad6d4"
         d="M267.3 128h-22.6c-6.1 0-11.2 5.1-11.2 11.3v96.4h45v-96.4c0-6.2-5-11.2-11.2-11.2z"
       ></path>
+      {/*cake face*/}
       <path
         fill="#ad4a38"
         d="M86.6 474.1h331.6c24.7 0 45-20.2 45-45V303.3c-145.5-.5-294.6-1.5-421.6 0V429c0 24.8 20.2 45 45 45z"
       ></path>
-      {/*cake face*/}
       <ellipse
         cx="127.2"
         cy="428.6"
@@ -95,6 +103,37 @@ export function BirthdayCake() {
         fill="#f4d7d7"
         ry="8"
       ></rect>
+      {isCandleOn ? null : (
+        <>
+          <rect
+            className={styles.smoke}
+            width="16"
+            height="28.5"
+            x="250"
+            y="28"
+            fill="#999"
+            ry="8"
+          ></rect>
+          <rect
+            className={styles.smoke}
+            width="16"
+            height="20.9"
+            x="246"
+            y="60"
+            fill="#999"
+            ry="8"
+          ></rect>
+          <rect
+            className={styles.smoke}
+            width="16"
+            height="20.9"
+            x="244"
+            y="6"
+            fill="#999"
+            ry="8"
+          ></rect>
+        </>
+      )}
     </svg>
   );
 }

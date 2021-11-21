@@ -1,0 +1,46 @@
+.flameOn {
+  animation: moveFlame 1s linear infinite;
+  transform-origin: 50% 15%;
+}
+
+.flameOff {
+  animation: fadeOut 0.8s;
+  opacity: 0;
+}
+
+.smoke {
+  animation: smoke 2s forwards;
+}
+
+@keyframes moveFlame {
+  from,
+  to {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes smoke {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  50% {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
