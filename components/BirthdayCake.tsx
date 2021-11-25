@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/BirthdayCake.module.css";
 
 type BirthdayCakeProps = {
@@ -5,6 +6,22 @@ type BirthdayCakeProps = {
 };
 
 export function BirthdayCake({ isCandleOn }: BirthdayCakeProps) {
+  const [isCakeSmiling, setIsCakeSmiling] = useState(true);
+  useEffect(() => {
+    if (isCandleOn) {
+      setIsCakeSmiling(true);
+    } else {
+      setIsCakeSmiling(false);
+      const timerId = setTimeout(() => {
+        setIsCakeSmiling(true);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }
+  }, [isCandleOn]);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -80,13 +97,28 @@ export function BirthdayCake({ isCandleOn }: BirthdayCakeProps) {
         <circle cx="178.8" cy="392.9" r="38.9" fill="#fff"></circle>
         <circle cx="178.8" cy="392.9" r="25"></circle>
       </g>
-      <path
-        fill="none"
-        stroke="#000"
-        strokeLinecap="round"
-        strokeWidth="5"
-        d="M227.4 429.3c16.2 14.2 34.2 14.6 50.4-1.8"
-      ></path>
+      {/*mouth*/}
+      {isCakeSmiling ? (
+        <path
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeWidth="6"
+          d="M227.4 429.3c16.2 14.2 34.2 14.6 50.4-1.8"
+        ></path>
+      ) : (
+        <ellipse
+          cx="252.6"
+          cy="417.3"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeWidth="6"
+          rx="31.6"
+          ry="23.8"
+        ></ellipse>
+      )}
+      {/*highlight big*/}
       <rect
         width="16"
         height="28.5"
@@ -95,6 +127,7 @@ export function BirthdayCake({ isCandleOn }: BirthdayCakeProps) {
         fill="#f4d7d7"
         ry="8"
       ></rect>
+      {/*highlight small*/}
       <rect
         width="16"
         height="20.9"
@@ -105,6 +138,7 @@ export function BirthdayCake({ isCandleOn }: BirthdayCakeProps) {
       ></rect>
       {isCandleOn ? null : (
         <>
+          {/*smoke*/}
           <rect
             className={styles.smoke}
             width="16"
